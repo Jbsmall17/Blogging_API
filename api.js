@@ -14,7 +14,7 @@ const app = express()
 
 app.use(express.json())
 app.use(express.urlencoded({extended : true}))
-// db.connectToDb() // connect to mongo db
+db.connectToDb() // connect to mongo db
 
 
 app.use("/", authRouter)
@@ -122,9 +122,9 @@ app.use((err, req, res, next) => {
     })
 })
 
-// app.listen(PORT,()=>{
-//     console.log(`localhost:${PORT}`)
-// })
+app.listen(PORT,()=>{
+    console.log(`localhost:${PORT}`)
+})
 
 
 module.exports = app

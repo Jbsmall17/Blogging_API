@@ -21,6 +21,10 @@ blogRouter.get("/:id", blogController.getBlog)
 
 blogRouter.patch("/:id", blogController.updateBlog)
 
+// edit blog
+
+blogRouter.put("/:id", blogController.editBlog)
+
 // delete a blog article
 
 blogRouter.delete("/:id", blogController.deleteBlog)

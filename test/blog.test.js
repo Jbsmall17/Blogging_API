@@ -140,7 +140,7 @@ describe("Blog endpoint test", ()=>{
             data : expect.any(Object)
         })
     })
-
+    
     it("should test deleteBlog endpoint successfully", async()=>{
          // create user
          const user =  await userModel.create({
@@ -173,5 +173,6 @@ describe("Blog endpoint test", ()=>{
         })
 
     })
+
 
 })

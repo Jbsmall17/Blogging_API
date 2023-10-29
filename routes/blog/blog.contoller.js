@@ -182,6 +182,49 @@ async function updateBlog(req,res,next){
 
 }
 
+async function editBlog(req,res,next){
+    try{
+        const newDetails = req.body
+        const id = req.params.id
+        const token = req.headers.authorization.split(" ")[1];
+        const JWT_SECRET = process.env.JWT_SECRET
+        const userDetials = jwt.verify(token,JWT_SECRET)  
+    
+        const {_id} = userDetials.user
+
+        const conditions = {
+            _id : id,
+            user_id : _id 
+        }
+
+        const update = {
+            $set: {
+              ...newDetails
+            }
+        }
+
+        const newBlog = await BlogModel.findOneAndUpdate(
+            conditions,
+            update,
+            {new : true}    
+        )
+        
+        logger.log("info","blog editted successfully")
+        return res.status(200).json({
+           message : "blog editted successfully",
+           data :  newBlog
+        })
+
+    }
+    catch(error){
+        logger.log("error","bad request")
+        res.status(400).json({
+           message : "bad request",
+           data : null 
+        })
+    }
+}
+
 async function deleteBlog(req,res,next){
     try{
     const id = req.params.id
@@ -216,6 +259,7 @@ module.exports = {
     createBlog,
     getBlogs,
     getBlog,
+    editBlog,
     updateBlog,
     deleteBlog
 }
